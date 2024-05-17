@@ -1,0 +1,455 @@
+科目名: プログラミング実習III
+課題: B8
+番号: 37022431
+氏名: 西　葵斗
+作成: 2023年11月21日
+
+----------------------------------------
+
+[課題 8.1]
+
+関数 db_dump の作成
+
+実行結果は次の通りである. 
+----------------------------------------
+[   0]AAC Al Arish : Egypt - Al Arish Airport
+[   1]FCO Rome : Italy Leonardo Da Vinci/Fiumicino
+[   2]ITM Osaka : Japan Itami International Was Osaka
+[   3]JFK New York : NY : USA John F Kennedy Intl Airport
+[   4]JRO Kilimanjaro : Tanzania Kilimanjaro
+[   5]KIX Osaka : Japan Kansai International
+[   6]NRT Tokyo : Japan - Narita
+[   7]PEK Beijing : China Peking Capital Airport
+[   8]SAF Santa Fe : NM : USA Santa Fe Municipal Airport
+[   9]SFO San Francisco : CA : USA San Francisco Intl Airport
+[  10]
+[  11]
+[  12]
+[  13]
+[  14]
+[  15]
+---------------------------------------- 
+アロー演算子がポインタに対して、ドット演算子が構造体やクラスに対して
+ということを理解していたのですぐにできた。
+----------------------------------------
+
+[課題 8.2]
+
+関数 db_linear_search の作成
+
+実行結果は次の通りである. 
+----------------------------------------
+AAC => Al Arish : Egypt - Al Arish Airport
+NO RECORD
+FCO => Rome : Italy Leonardo Da Vinci/Fiumicino
+JFK => New York : NY : USA John F Kennedy Intl Airport
+JRO => Kilimanjaro : Tanzania Kilimanjaro
+KIX => Osaka : Japan Kansai International
+NO RECORD
+NRT => Tokyo : Japan - Narita
+NO RECORD
+NO RECORD
+NO RECORD
+PEK => Beijing : China Peking Capital Airport
+SAF => Santa Fe : NM : USA Santa Fe Municipal Airport
+NO RECORD
+ITM => Osaka : Japan Itami International Was Osaka
+SFO => San Francisco : CA : USA San Francisco Intl Airport
+NO RECORD
+NO RECORD
+
+#define __USE_MINI__ をコメントアウト⤵
+
+AAC => Al Arish : Egypt - Al Arish Airport
+CDG => Paris : France Charles De Gaulle
+FCO => Rome : Italy Leonardo Da Vinci/Fiumicino
+JFK => New York : NY : USA John F Kennedy Intl Airport
+JRO => Kilimanjaro : Tanzania Kilimanjaro
+KIX => Osaka : Japan Kansai International
+NO RECORD
+NRT => Tokyo : Japan - Narita
+ICN => Incheon [Seoul] : South Korea - Incheon International Airport
+SYD => Sydney : New South Wales : Australia Sydney /KingsfordSmith/ Airport
+LHR => London : England : United Kingdom Heathrow
+PEK => Beijing : China Peking Capital Airport
+SAF => Santa Fe : NM : USA Santa Fe Municipal Airport
+NO RECORD
+ITM => Osaka : Japan Itami International Was Osaka
+SFO => San Francisco : CA : USA San Francisco Intl Airport
+NO RECORD
+ZYL => Sylhet : Bangladesh - Sylhet Airport
+ 
+---------------------------------------- 
+前回の課題でも使ったstrcmpをもちいてkeyの一致を確認し、０になれば
+そのときのデータを返すようにした。
+
+----------------------------------------
+[課題 8.3]
+
+前問で処理にかかる時間を計測する。
+
+実行結果は次の通りである. 
+----------------------------------------
+<オプションなし>
+$ ./a
+key = AAC
+cpu =    0.000000 [sec]
+AAC => Al Arish : Egypt - Al Arish Airport
+key = CXI
+cpu =    0.110000 [sec]
+CXI => Christmas Island : Australia - Cassidy Airport
+key = IYK
+cpu =    0.203000 [sec]
+IYK => Inyokern : CA : USA Inyokern Airport
+key = MVD
+cpu =    0.328000 [sec]
+MVD => Montevideo : Uruguay Carrasco
+key = SJW
+cpu =    0.422000 [sec]
+SJW => Shijiazhuang : China Shijiazhuang
+key = YFB
+cpu =    0.547000 [sec]
+YFB => Iqaluit : Northwest Territories : Canada - Iqaluit-Frobisher Bay Airport
+key = ZYL
+cpu =    0.578000 [sec]
+ZYL => Sylhet : Bangladesh - Sylhet Airport
+key = AAA
+cpu =    1.312000 [sec]
+NO RECORD
+key = LLL
+cpu =    1.281000 [sec]
+NO RECORD
+key = ZZZ
+cpu =    1.282000 [sec]
+NO RECORD
+key =
+
+<オプションあり>
+ $ ./a
+key = AAC
+cpu =    0.000000 [sec]
+AAC => Al Arish : Egypt - Al Arish Airport
+key = CXI
+cpu =    0.078000 [sec]
+CXI => Christmas Island : Australia - Cassidy Airport
+key = IYK
+cpu =    0.172000 [sec]
+IYK => Inyokern : CA : USA Inyokern Airport
+key = MVD
+cpu =    0.234000 [sec]
+MVD => Montevideo : Uruguay Carrasco
+key = SJW
+cpu =    0.328000 [sec]
+SJW => Shijiazhuang : China Shijiazhuang
+key = YFB
+cpu =    0.422000 [sec]
+YFB => Iqaluit : Northwest Territories : Canada - Iqaluit-Frobisher Bay Airport
+key = ZYL
+cpu =    0.453000 [sec]
+ZYL => Sylhet : Bangladesh - Sylhet Airport
+key = AAA
+cpu =    0.984000 [sec]
+NO RECORD
+key = LLL
+cpu =    0.969000 [sec]
+NO RECORD
+key = ZZZ
+cpu =    0.969000 [sec]
+NO RECORD
+key =
+
+---------------------------------------- 
+最初から順番に探索していくため、先頭に近づくほど処理が速いことがわかる。存在しない
+キーのときは一周する必要があるので一番長くなり、文字が異なっても同じである。また、
+オプションを付けるとだいたい1/8の割合で処理が速くなった。
+
+----------------------------------------
+[課題 8.4]
+
+二分探索で空港データの検索を行う関数 char *db_binary_searchを作成
+
+実行結果は次の通りである. 
+----------------------------------------
+AAC => Al Arish : Egypt - Al Arish Airport
+NO RECORD
+FCO => Rome : Italy Leonardo Da Vinci/Fiumicino
+JFK => New York : NY : USA John F Kennedy Intl Airport
+JRO => Kilimanjaro : Tanzania Kilimanjaro
+KIX => Osaka : Japan Kansai International
+NO RECORD
+NRT => Tokyo : Japan - Narita
+NO RECORD
+NO RECORD
+NO RECORD
+PEK => Beijing : China Peking Capital Airport
+SAF => Santa Fe : NM : USA Santa Fe Municipal Airport
+NO RECORD
+ITM => Osaka : Japan Itami International Was Osaka
+SFO => San Francisco : CA : USA San Francisco Intl Airport
+NO RECORD
+NO RECORD
+
+
+
+
+AAC => Al Arish : Egypt - Al Arish Airport
+CDG => Paris : France Charles De Gaulle
+FCO => Rome : Italy Leonardo Da Vinci/Fiumicino
+JFK => New York : NY : USA John F Kennedy Intl Airport
+JRO => Kilimanjaro : Tanzania Kilimanjaro
+KIX => Osaka : Japan Kansai International
+NO RECORD
+NRT => Tokyo : Japan - Narita
+ICN => Incheon [Seoul] : South Korea - Incheon International Airport
+SYD => Sydney : New South Wales : Australia Sydney /KingsfordSmith/ Airport
+LHR => London : England : United Kingdom Heathrow
+PEK => Beijing : China Peking Capital Airport
+SAF => Santa Fe : NM : USA Santa Fe Municipal Airport
+NO RECORD
+ITM => Osaka : Japan Itami International Was Osaka
+SFO => San Francisco : CA : USA San Francisco Intl Airport
+NO RECORD
+ZYL => Sylhet : Bangladesh - Sylhet Airport
+ 
+---------------------------------------- 
+最初、high<lowの部分について考えていなくて、in.txtからの入力が途中で
+止まってしまって原因を探るのに時間がかかった。
+----------------------------------------
+[課題 8.5]
+
+二分探索にかかる時間を調べる
+
+実行結果は次の通りである. 
+----------------------------------------
+<オプションなし>
+$ ./a
+key = AAC
+cpu =    0.078000 [sec]
+AAC => Al Arish : Egypt - Al Arish Airport
+key = CXI
+cpu =    0.062000 [sec]
+CXI => Christmas Island : Australia - Cassidy Airport
+key = IYK
+cpu =    0.078000 [sec]
+IYK => Inyokern : CA : USA Inyokern Airport
+key = MVD
+cpu =    0.063000 [sec]
+MVD => Montevideo : Uruguay Carrasco
+key = SJW
+cpu =    0.062000 [sec]
+SJW => Shijiazhuang : China Shijiazhuang
+key = YFB
+cpu =    0.094000 [sec]
+YFB => Iqaluit : Northwest Territories : Canada - Iqaluit-Frobisher Bay Airport
+key = ZYL
+cpu =    0.063000 [sec]
+ZYL => Sylhet : Bangladesh - Sylhet Airport
+key = AAA
+cpu =    0.093000 [sec]
+NO RECORD
+key = LLL
+cpu =    0.078000 [sec]
+NO RECORD
+key = ZZZ
+cpu =    0.079000 [sec]
+NO RECORD
+key =
+
+
+
+<オプションあり>
+$ ./a
+key = AAC
+cpu =    0.031000 [sec]
+AAC => Al Arish : Egypt - Al Arish Airport
+key = CXI
+cpu =    0.015000 [sec]
+CXI => Christmas Island : Australia - Cassidy Airport
+key = IYK
+cpu =    0.032000 [sec]
+IYK => Inyokern : CA : USA Inyokern Airport
+key = MVD
+cpu =    0.031000 [sec]
+MVD => Montevideo : Uruguay Carrasco
+key = SJW
+cpu =    0.031000 [sec]
+SJW => Shijiazhuang : China Shijiazhuang
+key = YFB
+cpu =    0.031000 [sec]
+YFB => Iqaluit : Northwest Territories : Canada - Iqaluit-Frobisher Bay Airport
+key = ZYL
+cpu =    0.032000 [sec]
+ZYL => Sylhet : Bangladesh - Sylhet Airport
+key = AAA
+cpu =    0.015000 [sec]
+NO RECORD
+key = LLL
+cpu =    0.032000 [sec]
+NO RECORD
+key = ZZZ
+cpu =    0.031000 [sec]
+NO RECORD
+key =
+ 
+---------------------------------------- 
+線形探索に比べるとどのキーをいれてもそれぞれが大体同じくらいの処理時間に
+なっていることが確認できる。オプションを付けるとだいたい半分くらいの時間
+に短縮できた。
+----------------------------------------
+[課題 8.6]
+
+ハッシュ法を用いて関数 db_hash_load と db_hash_search の作成。
+
+実行結果は次の通りである. 
+----------------------------------------
+(1)
+    [   0] SFO San Francisco : CA : USA San Francisco Intl Airport
+    [   1]     
+    [   2] AAC Al Arish : Egypt - Al Arish Airport
+    [   3] NRT Tokyo : Japan - Narita
+    [   4]     
+    [   5] SAF Santa Fe : NM : USA Santa Fe Municipal Airport
+    [   6]     
+    [   7] KIX Osaka : Japan Kansai International
+    [   8]     
+    [   9]     
+    [  10] JFK New York : NY : USA John F Kennedy Intl Airport
+    [  11] PEK Beijing : China Peking Capital Airport
+    [  12] ITM Osaka : Japan Itami International Was Osaka
+    [  13]     
+    [  14] FCO Rome : Italy Leonardo Da Vinci/Fiumicino
+    [  15] JRO Kilimanjaro : Tanzania Kilimanjaro
+
+(2)
+    AAC => Al Arish : Egypt - Al Arish Airport
+    NO RECORD
+    FCO => Rome : Italy Leonardo Da Vinci/Fiumicino
+    JFK => New York : NY : USA John F Kennedy Intl Airport
+    JRO => Kilimanjaro : Tanzania Kilimanjaro
+    KIX => Osaka : Japan Kansai International
+    NO RECORD
+    NRT => Tokyo : Japan - Narita
+    NO RECORD
+    NO RECORD
+    NO RECORD
+    PEK => Beijing : China Peking Capital Airport
+    SAF => Santa Fe : NM : USA Santa Fe Municipal Airport
+    NO RECORD
+    ITM => Osaka : Japan Itami International Was Osaka
+    SFO => San Francisco : CA : USA San Francisco Intl Airport
+    NO RECORD
+    NO RECORD
+
+
+    AAC => Al Arish : Egypt - Al Arish Airport
+    CDG => Paris : France Charles De Gaulle
+    FCO => Rome : Italy Leonardo Da Vinci/Fiumicino
+    JFK => New York : NY : USA John F Kennedy Intl Airport
+    JRO => Kilimanjaro : Tanzania Kilimanjaro
+    KIX => Osaka : Japan Kansai International
+    NO RECORD
+    NRT => Tokyo : Japan - Narita
+    ICN => Incheon [Seoul] : South Korea - Incheon International Airport
+    SYD => Sydney : New South Wales : Australia Sydney /KingsfordSmith/ Airport
+    LHR => London : England : United Kingdom Heathrow
+    PEK => Beijing : China Peking Capital Airport
+    SAF => Santa Fe : NM : USA Santa Fe Municipal Airport
+    NO RECORD
+    ITM => Osaka : Japan Itami International Was Osaka
+    SFO => San Francisco : CA : USA San Francisco Intl Airport
+    NO RECORD
+    ZYL => Sylhet : Bangladesh - Sylhet Airport
+ 
+---------------------------------------- 
+mの値を2*nにしていたがコアダンプで出来なかったのでRecordmaxの値にした。
+*db_hash_searchの方でh=mのときの条件を考えていなかったので苦戦した。
+----------------------------------------
+[課題 8.7]
+
+ハッシュ法による探索にかかる時間を調べる。
+
+実行結果は次の通りである. 
+----------------------------------------
+<オプションなし>
+$ ./a
+key = AAC
+cpu =    0.000000 [sec]
+AAC => Al Arish : Egypt - Al Arish Airport
+key = CXI
+cpu =    0.000000 [sec]
+CXI => Christmas Island : Australia - Cassidy Airport
+key = IYK
+cpu =    0.000000 [sec]
+IYK => Inyokern : CA : USA Inyokern Airport
+key = MVD
+cpu =    0.000000 [sec]
+MVD => Montevideo : Uruguay Carrasco
+key = SJW
+cpu =    0.000000 [sec]
+SJW => Shijiazhuang : China Shijiazhuang
+key = YFB
+cpu =    0.015000 [sec]
+YFB => Iqaluit : Northwest Territories : Canada - Iqaluit-Frobisher Bay Airport
+key = ZYL
+cpu =    0.000000 [sec]
+ZYL => Sylhet : Bangladesh - Sylhet Airport
+key = AAA
+cpu =    2.609000 [sec]
+NO RECORD
+key = LLL
+cpu =    2.579000 [sec]
+NO RECORD
+key = ZZZ
+cpu =    2.593000 [sec]
+NO RECORD
+key =
+
+
+
+
+<オプションあり>
+key = AAC
+cpu =    0.000000 [sec]
+AAC => Al Arish : Egypt - Al Arish Airport
+key = CXI
+cpu =    0.000000 [sec]
+CXI => Christmas Island : Australia - Cassidy Airport
+key = IYK
+cpu =    0.000000 [sec]
+IYK => Inyokern : CA : USA Inyokern Airport
+key = MVD
+cpu =    0.000000 [sec]
+MVD => Montevideo : Uruguay Carrasco
+key = SJW
+cpu =    0.000000 [sec]
+SJW => Shijiazhuang : China Shijiazhuang
+key = YFB
+cpu =    0.000000 [sec]
+YFB => Iqaluit : Northwest Territories : Canada - Iqaluit-Frobisher Bay Airport
+key = ZYL
+cpu =    0.000000 [sec]
+ZYL => Sylhet : Bangladesh - Sylhet Airport
+key = AAA
+cpu =    2.281000 [sec]
+NO RECORD
+key = LLL
+cpu =    2.234000 [sec]
+NO RECORD
+key = ZZZ
+cpu =    2.281000 [sec]
+NO RECORD
+key =
+
+---------------------------------------- 
+線形探索と比べると存在しないデータ以外の探索はすべて速いが、存在しないデータ
+のときは時間がよりかかってしまった。オプションをつけてもほんの少しだけ短縮さ
+れただけであった。
+
+----------------------------------------
+
+[課題 R8 の感想]
+
+二分探索とハッシュについてのプログラミングをしたがそれぞれの探索時間における
+メリット、デメリットについて実行してその目で確かめることが出来たのですごく興
+味をもった。今回プログラム自体はそこまで難しくないが、それぞれの仕組みを理解
+していないと時間がかかっていしまった。

@@ -1,0 +1,296 @@
+
+科目名: プログラミング実習III
+課題: B2
+番号: 37022431
+氏名: 西 葵斗
+作成: 2023年10月3日
+----------------------------------------
+
+[課題 2.1]
+
+前回の課題をdouble型の関数を作成することによって実行できるように改善する。 
+
+実行結果は次の通りである. 
+
+--------
+1.4142
+5.8310
+3.1396
+--------
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_1
+$ gcc -Wall dist2.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_1
+$ ./a < dist-in.txt > out.txt
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_1
+$ diff -w out.txt dist-exp.txt
+
+期待値と結果が一緒になったことが確認できた。
+
+関数の戻り値をいちいち代入せずに、直接print文で表示させることによって
+コンパクトなプログラムにした。関数を使うときは変数の型が複雑になってし
+まうことが多いので慎重にプログラムしようと思う。
+----------------------------------------
+
+[課題 2.2]
+
+void型の関数を利用して二次方程式の解を出力するプログラムを作成する。 
+
+実行結果は次の通りである
+
+------------------
+-2.00000 -1.00000
+-1.00000
+
+-4.13746 -0.36254
+-0.74568 2.14568
+1.00000
+0.37417 3.05440
+0.81386 3.68614
+
+------------------
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_2
+$ gcc -Wall qeq.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_2
+$ ./a < qeq-in.txt > out.txt
+a:b:c:a:b:c:a:b:c:a:b:c:a:b:c:a:b:c:a:b:c:a:b:c:a:b:c:
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_2
+$ diff -w out.txt qeq-exp.txt
+
+により一致することが確認できた。
+
+解の公式の2aで割る部分で最初は括弧を付けなかったので計算の順番が変
+わってしまい、期待した結果が得られなかった。判別式を利用する部分は
+前回の演習で作成したので問題はなかった。
+----------------------------------------
+
+[課題 2.3]
+
+最初に作成したプログラムを分割し、分割コンパイルを行う。
+
+実行結果は次の通りである
+
+-------
+1.4142
+5.8310
+3.1396
+-------
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_3
+$ gcc -c dist3.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_3
+$ gcc -c dist3main.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_3
+$ gcc dist3main.o dist3.o
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_3
+$ ./a < dist-in.txt > out.txt
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_3
+$ diff -w dist-exp.txt out.txt
+
+により、分割コンパイラを行った上、サンプルと一致することが確認できた。
+
+分割コンパイラは現在では大規模なプログラムをすることはないが、一部分をコンパイラ
+することによって全体の再コンパイラをする必要がなくなるという利点は覚えておきたい。
+----------------------------------------
+
+[課題 2.4]
+
+2_2で作成したプログラムを分割コンパイラする。
+
+実行結果は次の通りである
+-------------
+-2.00000 -1.00000
+-1.00000
+
+-4.13746 -0.36254
+-0.74568 2.14568
+1.00000
+0.37417 3.05440
+0.81386 3.68614
+
+-------------
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_4
+$ gcc -c qeq2.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_4
+$ gcc -c qeq2main.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_4
+$ gcc qeq2.o qeq2main.o
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_4
+$ ./a < qeq-in.txt > out.txt
+a:b:c:a:b:c:a:b:c:a:b:c:a:b:c:a:b:c:a:b:c:a:b:c:a:b:c:
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_4
+$ diff -w out.txt qeq-exp.txt
+
+により、分割コンパイラを行った上、サンプルと一致することが確認できた。
+
+void型関数でも同じように分割コンパイラができることが分かった。
+
+----------------------------------------
+
+[課題 2.5]
+
+二分法により二次方程式の解を出力するプログラムの作成。 
+
+実行結果は次の通りである
+------------------------
+1.41400000
+1.41400000
+1.41400000
+1.41421887
+-1.41424359
+1.41418750
+1.41421318
+7.99999976
+3.58113837
+------------------------
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_5
+$ gcc -c bisection.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_5
+$ gcc -c bisection_main.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_5
+$ gcc bisection.o bisection_main.o
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_5
+$ ./a < in.txt > out.txt
+a, b, c, x1, x2, eps を入力 : i  x1              x2              xmid           f1               f2              fmid
+a, b, c, x1, x2, eps を入力 : i  x1              x2              xmid           f1               f2              fmid
+a, b, c, x1, x2, eps を入力 : i  x1              x2              xmid           f1               f2              fmid
+a, b, c, x1, x2, eps を入力 : i  x1              x2              xmid           f1               f2              fmid
+a, b, c, x1, x2, eps を入力 : i  x1              x2              xmid           f1               f2              fmid
+a, b, c, x1, x2, eps を入力 : i  x1              x2              xmid           f1               f2              fmid
+a, b, c, x1, x2, eps を入力 : i  x1              x2              xmid           f1               f2              fmid
+a, b, c, x1, x2, eps を入力 : i  x1              x2              xmid           f1               f2              fmid
+a, b, c, x1, x2, eps を入力 : i  x1              x2              xmid           f1               f2              fmid
+a, b, c, x1, x2, eps を入力 :
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_5
+$ diff -w out.txt exp.txt
+
+により、サンプルと一致することを確認できた。
+
+最初聞いただけではすぐに条件文や計算方法が理解できなかったが、問題の例を
+一つ一つ見ていくことによって解決出来た。
+
+----------------------------------------
+
+[課題 2.6]
+
+構造体を用いてのプログラムを作成した。
+
+実行結果は次の通りである
+----------------------
+name: Taro
+stature: 175.4cm
+weight: 65.3kg
+BMI:21.2
+name: Hanako
+stature: 157.3cm
+weight: 48.8kg
+BMI:19.7
+----------------------
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_6
+$ gcc -Wall body.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_6
+$ ./a < body-in.txt > out.txt
+名前を入力して下さい (qで終了): 身長を入力してください体重を入力してください名前を入力して下さい (qで終了): 身長を入力してください体重を入力してください名前を入力して下さい (qで終了): 身長を入力してください
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_6
+$ diff -w out.txt body-exp.txt
+
+により、サンプルと一致することを確認できた・
+
+構造体での標準入力の仕方を忘れてしまっていたため、次に出てきても困らないよう
+にきちんと覚えておきたい。
+---------------------------------------
+
+[課題 2.7]
+
+dist3.cを構造体を用いてプログラムする。
+
+実行結果は次の通りである
+----------------
+1.4142
+5.8310
+3.1396
+
+----------------
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_7
+$ gcc -c dist4.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_7
+$ gcc -c dist4main.c
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_7
+$ gcc dist4.o dist4main.o
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_7
+$ ./a < dist4-in.txt > out.txt
+p1 と p2 の座標 (それぞれ x と y) をスペース区切りで : p2 の座標 (x と y): p1 と p2 の座標 (それぞれ x と y) をスペース区切りで : p2 の座標 (x と y): p1 と p2 の座標 (それぞれ x と y) をスペース区切りで : p2 の座標 (x と y):
+
+aotom@2525-Aoto-Surface-Laptop4 ~/pro3/e2/2_7
+$ diff -w out.txt dist4-exp.txt
+
+により、サンプルと一致することを確認できた。
+
+math.hでsqrtを使うほか特に難しい部分はなかった。
+
+----------------------------------------
+
+[課題 2.8]
+
+〜の関数を作成した. 
+
+実行結果は次の通りである
+----------------
+a=11, b=20, n=10000のとき
+
+11: 1000
+12: 1002
+13: 1023
+14: 985
+15: 1052
+16: 985
+17: 973
+18: 994
+19: 967
+20: 1019
+----------------
+
+より、11から20がおよそ1000ずつ生成されている。
+-----------------
+a=7, b=8, n=10のとき
+
+a, b, n: 7
+8
+10
+7 8 8 7 8 7 7 8 7 7
+7: 6
+8: 4
+-----------------
+より、7と8の生成数の合計が10になっていることが確認できた。
+
+前学期に乱数を現在時刻で発生させていたので、同じようにtime関数を
+用いて作成した。srand関数
+
+----------------------------------------
+
+[課題 R2 の感想]
+分割コンパイラは現在では大規模なプログラムをすることはないが、このように
+いちいちすべてコンパイラする必要がないという知識は持っておきたい。今回は
+distのプログラムを改良した問題が多かったのでスムーズにとくことが出来た。
+
